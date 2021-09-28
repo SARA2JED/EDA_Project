@@ -1,0 +1,60 @@
+---
+title: "EDA_doc"
+author: "Sara Alotaibi"
+date: "28/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## EDA_PROJECT R Markdown page
+
+in this html file you'll find the functions and explanations of the methods used to analyse the diamond data set 
+
+
+
+```{r diamonds}
+#import the tidyverse library to make use of its functions 
+library(tidyverse)
+
+#loading the Diamonds data set 
+
+Diamonds <- data.frame(diamonds)
+
+#take a glimpse of the data to check what we have to work with 
+
+glimpse(Diamonds)
+summary(Diamonds)
+```
+
+## example Plots
+
+some example plots:
+
+```{r }
+# simple graph 
+
+ggplot(diamonds, aes(x=carat, y=price)) + geom_point()
+```
+
+a few calculations on the data set 
+
+```{r }
+# avrage of diamond prices for each cut and the median  
+
+Diamonds %>% 
+  group_by(cut) %>% 
+  summarise("avg price"  = mean(price))
+
+
+Diamonds %>%
+  group_by(cut) %>%
+  summarise('number of diamonds'=n(), 
+            'avrage price'= mean(price), 
+            median=median(price)
+           )
+
+```
+
